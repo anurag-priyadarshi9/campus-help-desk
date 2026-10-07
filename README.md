@@ -18,7 +18,7 @@ The database file `helpdesk.db` is created on first run.
 ## Logins
 
 - Student: use **Create account** on the home page.
-- Staff (seeded): `admin@college.edu` / `admin123`. Change this password before real use.
+- Staff (seeded):
 
 ## Project layout
 
