@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Help Desk</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Campus Help Desk</a>
+    <div id="userbox" class="userbox" hidden>
+      <span id="whoami"></span>
+      <button class="btn ghost" id="change-pw-btn" type="button">Change password</button>
+      <button class="btn ghost" id="logout" type="button">Log out</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Logged-out view -->
+    <section id="auth" class="auth" hidden>
+      <div class="intro">
+        <h1>Report a campus problem and follow it until it's fixed.</h1>
+        <p>Hostel, library, fees, Wi-Fi or academics: file a complaint, see its status, and read the staff reply in one place.</p>
+      </div>
+      <div class="card auth-card">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true" data-tab="login">Log in</button>
+          <button type="button" role="tab" aria-selected="false" data-tab="register">Create account</button>
+        </div>
+
+        <form id="login-form">
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+          <p class="error" role="alert"></p>
+          <button class="btn primary" type="submit">Log in</button>
+        </form>
+
+        <form id="register-form" hidden>
+          <label>Full name<input name="name" autocomplete="name" required></label>
+          <label>College email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Password (6+ characters)<input type="password" name="password" minlength="6" autocomplete="new-password" required></label>
+          <p class="error" role="alert"></p>
+          <button class="btn primary" type="submit">Create account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Logged-in view -->
+    <section id="app" hidden>
+      <div id="stats" class="stats" hidden></div>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search title or description" aria-label="Search complaints">
+        <select id="filter" aria-label="Filter by status"></select>
+        <button class="btn primary" id="new-btn" type="button" hidden>New complaint</button>
+        <button class="btn primary" id="staff-btn" type="button" hidden>Add staff</button>
+      </div>
+      <h2 id="list-title"></h2>
+      <ul id="tickets" class="tickets"></ul>
+    </section>
+  </main>
+
+  <dialog id="new-dialog" aria-labelledby="new-title">
+    <form id="new-form" class="dlg-form">
+      <header class="dlg-head">
+        <h2 id="new-title">New complaint</h2>
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+      </header>
+      <label>Title<input name="title" maxlength="120" required></label>
+      <div class="row2">
+        <label>Category<select id="t-category" name="category"></select></label>
+        <label>Priority<select id="t-priority" name="priority"></select></label>
+      </div>
+      <label>What happened?<textarea name="description" rows="6" maxlength="2000" required></textarea></label>
+      <p class="error" role="alert"></p>
+      <button class="btn primary" type="submit">Submit complaint</button>
+    </form>
+  </dialog>
+
+  <dialog id="detail" aria-labelledby="detail-title">
+    <div id="detail-body"></div>
+  </dialog>
+
+  <dialog id="password-dialog" aria-labelledby="password-title">
+    <form id="password-form" class="dlg-form">
+      <header class="dlg-head">
+        <h2 id="password-title">Change password</h2>
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+      </header>
+      <label>Your email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Current password<input type="password" name="old_password" autocomplete="current-password" required></label>
+      <label>New password (6+ characters)<input type="password" name="new_password" minlength="6" autocomplete="new-password" required></label>
+      <p class="error" role="alert"></p>
+      <button class="btn primary" type="submit">Update password</button>
+    </form>
+  </dialog>
+
+  <dialog id="staff-dialog" aria-labelledby="staff-title">
+    <form id="staff-form" class="dlg-form">
+      <header class="dlg-head">
+        <h2 id="staff-title">Add staff account</h2>
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+      </header>
+      <label>Full name<input name="name" autocomplete="off" required></label>
+      <label>Email<input type="email" name="email" autocomplete="off" required></label>
+      <label>Temporary password (6+ characters)<input type="password" name="password" minlength="6" autocomplete="new-password" required></label>
+      <p class="error" role="alert"></p>
+      <button class="btn primary" type="submit">Create staff account</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
