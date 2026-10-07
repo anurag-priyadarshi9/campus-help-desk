@@ -56,12 +56,15 @@ app = Flask(__name__)
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
-    "dev-only-change-me"
+    "development-secret-change-this"
 )
 
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE="Lax"
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=(
+        os.environ.get("COOKIE_SECURE", "0") == "1"
+    ),
 )
 
 
